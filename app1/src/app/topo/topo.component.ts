@@ -9,6 +9,8 @@ export class TopoComponent implements OnInit {
 
   constructor() { }
 
+  public titulo: string = 'Aprendendo Inglês'
+
   ngOnInit() {
   }
 
