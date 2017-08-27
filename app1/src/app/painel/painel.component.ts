@@ -19,9 +19,10 @@ export class PainelComponent implements OnInit {
 
   public progresso: number = 0
 
+  public tentativas: number = 3
+
   constructor() {
     this.atualizaRodada()
-    console.log(this.rodadaFrase)
   }
 
   ngOnInit() {
@@ -41,14 +42,18 @@ export class PainelComponent implements OnInit {
       // barra de progresso
       this.progresso = this.progresso + (100 / this.frases.length)
     } else {
-      alert('tradução errada')
+      // diminiur a variavel tentativas
+      this.tentativas--;
+      if (this.tentativas === -1) {
+        alert('acabou as tentativas')
+      }
     }
   }
 
   private atualizaRodada(): void {
     // define a frase da rodada com base em alguma lógica
     this.rodadaFrase = this.frases[this.rodada]
-    
+
     // limpa resposta
     this.resposta = ''
   }
