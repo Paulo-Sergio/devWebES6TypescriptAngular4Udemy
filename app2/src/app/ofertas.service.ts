@@ -57,4 +57,16 @@ export class OfertasService {
     return this.ofertas
   }
 
+  public getOfertas2(): Promise<Array<Oferta>> {
+    return new Promise(function (resolve, reject) {
+      // algum tipo de processamento que ao finalizar chama a função resolve ou reject
+      let deu_certo = false
+      if (deu_certo) {
+        resolve(this.ofertas)
+      } else {
+        reject({ codigo_erro: 404, mensagem: 'Não encontrado!!' })
+      }
+    })
+  }
+
 }
