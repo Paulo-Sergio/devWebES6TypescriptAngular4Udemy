@@ -49,8 +49,12 @@
   <div class="row" style="margin-top: 25px; margin-bottom: 150px">
     <div class="col">
       <nav class="nav nav-tabs" id="myTab" role="tablist">
-        <a class="nav-item nav-link" data-toggle="tab" routerLinkActive="active" routerLink="como-usar" role="tab" aria-expanded="true">Como usar</a>
-        <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" routerLinkActive="active" routerLink="onde-fica" role="tab">Onde fica?</a>
+        <li class="nav-item">
+          <a class="nav-link active" data-toggle="tab" routerLink="como-usar" role="tab" aria-expanded="true">Como usar</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" data-toggle="tab" routerLink="onde-fica" role="tab">Onde fica?</a>
+        </li>
       </nav>
       <div class="tab-content">
         <router-outlet></router-outlet>
