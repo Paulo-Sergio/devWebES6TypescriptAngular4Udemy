@@ -1,4 +1,4 @@
-import { Http } from '@angular/http'
+import { Http, Response } from '@angular/http'
 import { Injectable } from "@angular/core"
 
 import { Oferta } from './shared/oferta.model'
@@ -6,6 +6,7 @@ import { URL_API } from './app.api'
 
 import 'rxjs/add/operator/toPromise'
 import 'rxjs/add/operator/map'
+import 'rxjs/add/operator/retry'
 
 import { Observable } from "rxjs/Observable"
 
@@ -18,19 +19,19 @@ export class OfertasService {
     // efetua a requisicao http (convertendo de observable para promise)
     return this.http.get(URL_API + '/ofertas?destaque=true')
       .toPromise()
-      .then((resposta: any) => resposta.json())
+      .then((resposta: Response) => resposta.json())
   }
 
   public getOfertasPorCategoria(categoria: string): Promise<Oferta[]> {
     return this.http.get(URL_API + '/ofertas?categoria=' + categoria)
       .toPromise()
-      .then((respota: any) => respota.json())
+      .then((respota: Response) => respota.json())
   }
 
   public getOfertaPorId(id: number): Promise<Oferta> {
     return this.http.get(URL_API + '/ofertas?id=' + id)
       .toPromise()
-      .then((resposta: any) => {
+      .then((resposta: Response) => {
         return resposta.json()[0]
       })
   }
@@ -38,7 +39,7 @@ export class OfertasService {
   public getComoUsarOfertaPorId(id: number): Promise<string> {
     return this.http.get(URL_API + '/como-usar?id=' + id)
       .toPromise()
-      .then((resposta: any) => {
+      .then((resposta: Response) => {
         return resposta.json()[0].descricao
       })
   }
@@ -46,14 +47,15 @@ export class OfertasService {
   public getOndeFicaPorId(id: number): Promise<string> {
     return this.http.get(URL_API + '/onde-fica?id=' + id)
       .toPromise()
-      .then((resposta: any) => {
+      .then((resposta: Response) => {
         return resposta.json()[0].descricao
       })
   }
 
   public pesquisaOfertas(termo: string): Observable<Oferta[]> {
     return this.http.get(URL_API + '/ofertas?descricao_oferta_like=' + termo)
-      .map((resposta: any) => { return resposta.json() })
+      .retry(10) // vai fazer 10 tentivas caso a conexao caia
+      .map((resposta: Response) => { return resposta.json() })
   }
 
   /*
