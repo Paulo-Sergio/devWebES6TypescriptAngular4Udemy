@@ -12,7 +12,7 @@ import { Oferta } from "../shared/oferta.model";
 })
 export class TopoComponent implements OnInit {
 
-  public ofertas: Observable<Array<Oferta>>
+  public ofertas: Observable<Oferta[]>
 
   constructor(private ofertasService: OfertasService) { }
 
@@ -22,7 +22,7 @@ export class TopoComponent implements OnInit {
   public pesquisa(termoDaBusca: string): void {
     this.ofertas = this.ofertasService.pesquisaOferta(termoDaBusca)
     this.ofertas.subscribe(
-      (ofertas: Array<Oferta>) => console.log(ofertas)
+      (ofertas: Oferta[]) => console.log(ofertas)
     )
   }
 

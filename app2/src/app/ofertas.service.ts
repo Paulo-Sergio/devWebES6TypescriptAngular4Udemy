@@ -14,14 +14,14 @@ export class OfertasService {
 
   constructor(private http: Http) { }
 
-  public getOfertas(): Promise<Array<Oferta>> {
+  public getOfertas(): Promise<Oferta[]> {
     // efetua a requisicao http (convertendo de observable para promise)
     return this.http.get(URL_API + '/ofertas?destaque=true')
       .toPromise()
       .then((resposta: any) => resposta.json())
   }
 
-  public getOfertasPorCategoria(categoria: string): Promise<Array<Oferta>> {
+  public getOfertasPorCategoria(categoria: string): Promise<Oferta[]> {
     return this.http.get(URL_API + '/ofertas?categoria=' + categoria)
       .toPromise()
       .then((respota: any) => respota.json())
@@ -51,7 +51,7 @@ export class OfertasService {
       })
   }
 
-  public pesquisaOferta(termo: string): Observable<Array<Oferta>> {
+  public pesquisaOferta(termo: string): Observable<Oferta[]> {
     return this.http.get(URL_API + 'ofertas?descricao_oferta=' + termo)
       .map((resposta: any) => { return resposta.json() })
   }
@@ -59,7 +59,7 @@ export class OfertasService {
   /*
   ** Exemplo de promisses(resolve,reject) | sem requisicao Http
   **
-  public getOfertas2(): Promise<Array<Oferta>> {
+  public getOfertas2(): Promise<Oferta[]> {
     return new Promise((resolve, reject) => {
       // algum tipo de processamento que ao finalizar chama a função resolve ou reject
       let deu_certo = true
@@ -69,19 +69,19 @@ export class OfertasService {
         reject({ codigo_erro: 404, mensagem: 'Não encontrado!!' })
       }
     })
-      .then((ofertas: Array<Oferta>) => {
+      .then((ofertas: Oferta[]) => {
         // fazer alguma tratativa
         console.log('primeiro then')
         return ofertas
       })
-      .then((ofertas: Array<Oferta>) => {
+      .then((ofertas: Oferta[]) => {
         // fazer uma outra tratativa
         console.log('segundo then')
         return new Promise((resolve2, reject2) => {
           setTimeout(() => { resolve2(ofertas) }, 3000)
         })
       })
-      .then((ofertas: Array<Oferta>) => {
+      .then((ofertas: Oferta[]) => {
         console.log('terceiro then executado apos 3 segundos pq estava aguardando uma promisse')
         return ofertas
       })

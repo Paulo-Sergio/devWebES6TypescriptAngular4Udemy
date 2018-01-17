@@ -10,7 +10,7 @@ import { Oferta } from "../shared/oferta.model";
 })
 export class HomeComponent implements OnInit {
 
-  public ofertas: Array<Oferta>
+  public ofertas: Oferta[]
 
   constructor(private ofertasService: OfertasService) { }
 
@@ -18,7 +18,7 @@ export class HomeComponent implements OnInit {
     // this.ofertas = this.ofertasService.getOfertas()
 
     this.ofertasService.getOfertas()
-      .then((ofertas: Array<Oferta>) => this.ofertas = ofertas)
+      .then((ofertas: Oferta[]) => this.ofertas = ofertas)
       .catch((param: any) => console.log(param))
 
     console.log(this.ofertas)

@@ -10,14 +10,14 @@ import { OfertasService } from '../ofertas.service'
 })
 export class RestaurantesComponent implements OnInit {
 
-  public ofertas: Array<Oferta>
+  public ofertas: Oferta[]
 
   constructor(private ofertasService: OfertasService) { }
 
   ngOnInit() {
 
     this.ofertasService.getOfertasPorCategoria('restaurante')
-      .then((ofertas: Array<Oferta>) => {
+      .then((ofertas: Oferta[]) => {
         this.ofertas = ofertas
       })
       .catch((param: any) => console.log(param))
