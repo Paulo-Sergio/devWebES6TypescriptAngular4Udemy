@@ -192,6 +192,20 @@
       "complemento": "asd",
       "formaPagamento": "debito",
       "id": 1
+    },
+    {
+      "endereco": "rua 10",
+      "numero": "10",
+      "complemento": "",
+      "formaPagamento": "dinheiro",
+      "id": 2
+    },
+    {
+      "endereco": "rua teste",
+      "numero": "15",
+      "complemento": "casa A",
+      "formaPagamento": "debito",
+      "id": 3
     }
   ]
 }
