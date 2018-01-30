@@ -15,7 +15,7 @@ export class OfertaComponent implements OnInit {
   public oferta: Oferta
 
   constructor(
-    private route: ActivatedRoute, 
+    private route: ActivatedRoute,
     private ofertasService: OfertasService,
     private carrinhoService: CarrinhoService
   ) { }
@@ -32,7 +32,10 @@ export class OfertaComponent implements OnInit {
           console.log(oferta)
         })
     })
+  }
 
+  public adicionarItemCarrinho(): void {
+    this.carrinhoService.incluirItem(this.oferta)
   }
 
 }
