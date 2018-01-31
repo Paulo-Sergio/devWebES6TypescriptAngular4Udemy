@@ -16,6 +16,7 @@ export class CarrinhoService {
     console.log('Oferta recebida no serviço: ' + oferta)
     let itemCarrinho: ItemCarrinho = new ItemCarrinho(oferta.id, oferta.imagens[0], oferta.titulo, oferta.descricao_oferta, oferta.valor, 1)
     console.log(itemCarrinho)
+    this.itens.push(itemCarrinho)
   }
 
 }
