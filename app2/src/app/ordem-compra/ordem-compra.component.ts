@@ -3,6 +3,7 @@ import { OrdemCompraService } from '../ordem-compra.service'
 import { Pedido } from '../shared/pedido.model'
 import { NgForm } from '@angular/forms';
 import { CarrinhoService } from 'app/carrinho.service';
+import { ItemCarrinho } from 'app/shared/item-carrinho.model';
 
 @Component({
   selector: 'app-ordem-compra',
@@ -15,6 +16,7 @@ export class OrdemCompraComponent implements OnInit {
   @ViewChild('formulario') public formulario: NgForm
 
   public idPedidoCompra: number
+  public itensCarrinho: ItemCarrinho[]
 
   constructor(
     private ordemCompraService: OrdemCompraService,
@@ -22,7 +24,9 @@ export class OrdemCompraComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    console.log('Ordem compra - Array de itens do carrinho: ' + this.carrinhoService.exibirItens())
+    this.itensCarrinho = this.carrinhoService.exibirItens()
+    console.log('itens do carrinho...')
+    console.log(this.itensCarrinho)
   }
 
   public confirmarCompra() {

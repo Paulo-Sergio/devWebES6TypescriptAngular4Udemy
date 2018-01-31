@@ -15,12 +15,10 @@ export class HomeComponent implements OnInit {
   constructor(private ofertasService: OfertasService) { }
 
   ngOnInit() {
-    // this.ofertas = this.ofertasService.getOfertas()
-
     this.ofertasService.getOfertas()
       .then((ofertas: Oferta[]) => {
         this.ofertas = ofertas
-        console.log(this.ofertas)
+        // console.log(this.ofertas)
       })
       .catch((param: any) => console.log(param))
   }
