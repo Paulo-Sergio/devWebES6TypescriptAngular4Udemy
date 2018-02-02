@@ -18,9 +18,9 @@
         <div>
           <div class="row">
             <div class="col">
-              <button type="button" class="btn btn-link">-</button>
+              <button (click)="diminuir(item)" type="button" class="btn btn-link">-</button>
               {{item.quantidade}}
-              <button type="button" class="btn btn-link">+</button>
+              <button (click)="adicionar(item)" type="button" class="btn btn-link">+</button>
             </div>
           </div>
         </div>

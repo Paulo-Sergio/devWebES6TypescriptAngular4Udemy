@@ -48,4 +48,12 @@ export class OrdemCompraComponent implements OnInit {
     return this.carrinhoService.totalCarrinhoCompras()
   }
 
+  public adicionar(item: ItemCarrinho): void {
+    this.carrinhoService.adicionarQuantidade(item)
+  }
+
+  public diminuir(item: ItemCarrinho): void {
+    this.carrinhoService.diminuirQuantidade(item)
+  }
+
 }
