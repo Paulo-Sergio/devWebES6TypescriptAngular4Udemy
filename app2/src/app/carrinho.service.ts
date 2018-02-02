@@ -56,11 +56,15 @@ export class CarrinhoService {
       itemCarrinhoEncontrado.quantidade -= 1
 
       // removendo item com quantidade 0
-      if(itemCarrinhoEncontrado.quantidade === 0) {
+      if (itemCarrinhoEncontrado.quantidade === 0) {
         let indice = this.itens.indexOf(itemCarrinhoEncontrado)
         this.itens.splice(indice, 1)
       }
     }
+  }
+
+  public limparCarrinho(): void {
+    this.itens = []
   }
 
 }

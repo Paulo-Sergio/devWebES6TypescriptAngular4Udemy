@@ -199,6 +199,54 @@
       "complemento": "104",
       "formaPagamento": "debito",
       "id": 2
+    },
+    {
+      "endereco": "rua teste",
+      "numero": "10",
+      "complemento": "A",
+      "formaPagamento": "debito",
+      "itens": [
+        {
+          "id": 2,
+          "img": {
+            "url": "/assets/ofertas/2/img1.jpg"
+          },
+          "titulo": "Cozinha Mexicana",
+          "descricao_oferta": "Almoço ou Jantar com Rodízio Mexicano delicioso.",
+          "valor": 32.9,
+          "quantidade": 1
+        },
+        {
+          "id": 5,
+          "img": {
+            "url": "/assets/ofertas/5/img1.jpg"
+          },
+          "titulo": "Kart",
+          "descricao_oferta": "Bateria de Kart de 30 minutos.",
+          "valor": 54.9,
+          "quantidade": 2
+        }
+      ],
+      "id": 3
+    },
+    {
+      "endereco": "rua abc",
+      "numero": "35",
+      "complemento": "B",
+      "formaPagamento": "dinheiro",
+      "itens": [
+        {
+          "id": 3,
+          "img": {
+            "url": "/assets/ofertas/3/img1.jpg"
+          },
+          "titulo": "Pizzas Grandes",
+          "descricao_oferta": "Pizza Grande, Mussarela, Marguerita ou outras!",
+          "valor": 21.9,
+          "quantidade": 3
+        }
+      ],
+      "id": 4
     }
   ]
 }

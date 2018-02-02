@@ -31,16 +31,25 @@ export class OrdemCompraComponent implements OnInit {
 
   public confirmarCompra() {
     console.log(this.formulario)
+
+    // apenas enviar o pedido se houver Item no carrinho
+    if(this.carrinhoService.exibirItens().length === 0){
+      alert('Você não selecionou nenhum item!')
+      return
+    }
+
     let pedido: Pedido = new Pedido(
       this.formulario.value.endereco,
       this.formulario.value.numero,
       this.formulario.value.complemento,
-      this.formulario.value.formaPagamento
+      this.formulario.value.formaPagamento,
+      this.carrinhoService.exibirItens()
     )
     this.ordemCompraService.efetivarCompra(pedido)
       .subscribe((idPedido: number) => {
         console.log('Pedido de numero: ' + idPedido)
         this.idPedidoCompra = idPedido
+        this.carrinhoService.limparCarrinho()
       })
   }
 
