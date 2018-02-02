@@ -44,4 +44,8 @@ export class OrdemCompraComponent implements OnInit {
       })
   }
 
+  public getTotalCarrinho(): number {
+    return this.carrinhoService.totalCarrinhoCompras()
+  }
+
 }

@@ -15,7 +15,26 @@ export class CarrinhoService {
   public incluirItem(oferta: Oferta): void {
     let itemCarrinho: ItemCarrinho = new ItemCarrinho(oferta.id, oferta.imagens[0], oferta.titulo, oferta.descricao_oferta, oferta.valor, 1)
     console.log(itemCarrinho)
-    this.itens.push(itemCarrinho)
+
+    let itemCarrinhoEncontrado = this.itens.find((item: ItemCarrinho) => {
+      return item.id === itemCarrinho.id
+    })
+
+    if (itemCarrinhoEncontrado) {
+      itemCarrinhoEncontrado.quantidade += 1
+    } else {
+      this.itens.push(itemCarrinho)
+    }
+  }
+
+  public totalCarrinhoCompras(): number {
+    let total: number = 0
+
+    this.itens.map((item: ItemCarrinho) => {
+      total = total + (item.valor * item.quantidade)
+    })
+
+    return total
   }
 
 }
