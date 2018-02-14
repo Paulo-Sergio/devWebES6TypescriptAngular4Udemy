@@ -1,9 +1,10 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { OrdemCompraService } from '../ordem-compra.service'
-import { Pedido } from '../shared/pedido.model'
+import { OrdemCompraService } from '../ordem-compra.service';
+import { Pedido } from '../shared/pedido.model';
 import { NgForm } from '@angular/forms';
 import { ItemCarrinho } from '../shared/item-carrinho.model';
 import { CarrinhoService } from '../carrinho.service';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-ordem-compra',
@@ -13,7 +14,12 @@ import { CarrinhoService } from '../carrinho.service';
 })
 export class OrdemCompraComponent implements OnInit {
 
-  @ViewChild('formulario') public formulario: NgForm
+  public formulario: FormGroup = new FormGroup({
+    'endereco': new FormControl(null, [Validators.required, Validators.minLength(3), Validators.maxLength(120)]),
+    'numero': new FormControl(null, [Validators.required, Validators.minLength(1), Validators.maxLength(20)]),
+    'complemento': new FormControl(null),
+    'formaPagamento': new FormControl(null, [Validators.required])
+  })
 
   public idPedidoCompra: number
   public itensCarrinho: ItemCarrinho[]
@@ -31,9 +37,16 @@ export class OrdemCompraComponent implements OnInit {
 
   public confirmarCompra() {
     console.log(this.formulario)
+    if (this.formulario.status === 'INVALID') {
+      this.formulario.get('endereco').markAsTouched()
+      this.formulario.get('numero').markAsTouched()
+      this.formulario.get('complemento').markAsTouched()
+      this.formulario.get('formaPagamento').markAsTouched()
+      return
+    }
 
     // apenas enviar o pedido se houver Item no carrinho
-    if(this.carrinhoService.exibirItens().length === 0){
+    if (this.carrinhoService.exibirItens().length === 0) {
       alert('Você não selecionou nenhum item!')
       return
     }
