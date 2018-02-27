@@ -2,7 +2,6 @@
   "ofertas": [
     {
       "id": 1,
-	  "teste": 123
       "categoria": "restaurante",
       "titulo": "Super Burger",
       "descricao_oferta": "Rodízio de Mini-hambúrger com opção de entrada.",
