@@ -5,3 +5,19 @@
     height: 60px;
     width: 100%;
 }
+
+input.ng-invalid.ng-touched {
+    /* quando forem tocados e permanecerem invalidos */
+    border: 1px solid red;
+}
+select.ng-invalid.ng-touched {
+    /* quando forem tocados e permanecerem invalidos */
+    border: 1px solid red;
+}
+
+input.ng-valid.ng-touched {
+    border: 1px solid green;
+}
+select.ng-valid.ng-touched {
+    border: 1px solid green;
+}
