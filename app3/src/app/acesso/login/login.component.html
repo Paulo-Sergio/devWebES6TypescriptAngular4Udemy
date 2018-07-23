@@ -3,7 +3,12 @@
     <div class="card-title"></div>
 
     <div class="text-center">
-      <small *ngIf="msgCamposObrigatorio" class="text-danger">Preencha o e-mail e a senha</small>
+      <small 
+        *ngIf="(!formulario.get('email').valid && formulario.get('email').touched) || (!formulario.get('senha').valid && formulario.get('senha').touched)" 
+        class="text-danger"
+      >
+        Preencha o e-mail e senha corretamente!
+      </small>        
     </div>
     
     <form [formGroup]="formulario" (ngSubmit)="autenticar()">

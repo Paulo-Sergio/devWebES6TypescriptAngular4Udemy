@@ -11,11 +11,9 @@ export class LoginComponent implements OnInit {
 
   @Output() public exibirPainel: EventEmitter<string> = new EventEmitter<string>()
 
-  public msgCamposObrigatorio: boolean = false
-
   public formulario: FormGroup = new FormGroup({
-    'email': new FormControl(null, [Validators.required]),
-    'senha': new FormControl(null, [Validators.required]),
+    'email': new FormControl(null, [Validators.required, Validators.email]),
+    'senha': new FormControl(null, [Validators.required, Validators.minLength(6)]),
   })
 
   constructor(
@@ -32,13 +30,11 @@ export class LoginComponent implements OnInit {
   public autenticar(): void {
     console.log(this.formulario)
 
-    if(this.formulario.status === 'INVALID') {
+    if (this.formulario.status === 'INVALID') {
       this.formulario.get('email').markAsTouched()
       this.formulario.get('senha').markAsTouched()
-      this.msgCamposObrigatorio = true
       return
     }
-    this.msgCamposObrigatorio = false
 
     this.authService.autenticar(this.formulario.value.email, this.formulario.value.senha)
   }
