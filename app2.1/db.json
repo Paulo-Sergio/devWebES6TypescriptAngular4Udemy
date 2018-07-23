@@ -252,6 +252,25 @@
         }
       ],
       "id": 5
+    },
+    {
+      "endereco": "teste",
+      "numero": "123",
+      "complemento": "A",
+      "formaPagamento": "dinheiro",
+      "itens": [
+        {
+          "id": 5,
+          "img": {
+            "url": "/assets/ofertas/5/img1.jpg"
+          },
+          "titulo": "Kart",
+          "descricao_oferta": "Bateria de Kart de 30 minutos.",
+          "valor": 54.9,
+          "quantidade": 1
+        }
+      ],
+      "id": 6
     }
   ]
 }
