@@ -26,13 +26,17 @@ export class AuthService {
         firebase.database().ref(`usuario_detalhe/${btoa(usuario.email)}`)
           .set(usuario)
       })
-      .catch((error: Error) => {
+      .catch((error: any) => {
         console.log(error)
+        if (error.code == 'auth/email-already-in-use') {
+          error.status = 400
+          return error
+        }
       })
   }
 
-  public autenticar(email: string, senha: string): void {
-    firebase.auth().signInWithEmailAndPassword(email, senha)
+  public autenticar(email: string, senha: string): Promise<any> {
+    return firebase.auth().signInWithEmailAndPassword(email, senha)
       .then((resp: any) => {
         console.log(resp)
         firebase.auth().currentUser.getIdToken()
@@ -43,8 +47,12 @@ export class AuthService {
             this.router.navigate(['/home'])
           })
       })
-      .catch((error: Error) => {
+      .catch((error: any) => {
         console.log(error)
+        if (error.code == 'auth/user-not-found') {
+          error.status = 400
+          return error
+        }
       })
   }
 

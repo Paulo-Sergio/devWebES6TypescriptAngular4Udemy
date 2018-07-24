@@ -12,6 +12,8 @@ export class CadastroComponent implements OnInit {
 
   @Output() public exibirPainel: EventEmitter<string> = new EventEmitter<string>()
 
+  public usuarioJaCadastrado: boolean = false
+
   public formulario: FormGroup = new FormGroup({
     'email': new FormControl(null, [Validators.required, Validators.email]),
     'nome_completo': new FormControl(null, [Validators.required, Validators.minLength(3)]),
@@ -33,7 +35,7 @@ export class CadastroComponent implements OnInit {
   public cadastrarUsuario(): void {
     console.log(this.formulario)
 
-    if(this.formulario.status === 'INVALID') {
+    if (this.formulario.status === 'INVALID') {
       this.formulario.get('email').markAsTouched()
       this.formulario.get('nome_completo').markAsTouched()
       this.formulario.get('nome_usuario').markAsTouched()
@@ -49,8 +51,13 @@ export class CadastroComponent implements OnInit {
     )
 
     this.authService.cadastrarUsuario(usuario)
-      .then(() => {
-        this.exibirPainelLogin()
+      .then((resp) => {
+        console.log(resp)
+        if (resp.status == 400) {
+          this.usuarioJaCadastrado = true
+        } else {
+          this.exibirPainelLogin()
+        }
       })
   }
 

@@ -11,6 +11,8 @@ export class LoginComponent implements OnInit {
 
   @Output() public exibirPainel: EventEmitter<string> = new EventEmitter<string>()
 
+  public usuarioNaoEncontrado: boolean = false
+
   public formulario: FormGroup = new FormGroup({
     'email': new FormControl(null, [Validators.required, Validators.email]),
     'senha': new FormControl(null, [Validators.required, Validators.minLength(6)]),
@@ -37,6 +39,11 @@ export class LoginComponent implements OnInit {
     }
 
     this.authService.autenticar(this.formulario.value.email, this.formulario.value.senha)
+      .then((resp: any) => {
+        console.log(resp.status)
+        if (resp.status == 400) 
+          this.usuarioNaoEncontrado = true
+      })
   }
 
 }

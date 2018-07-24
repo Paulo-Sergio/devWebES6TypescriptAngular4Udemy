@@ -1,6 +1,10 @@
 <div class="card" style="width: 20rem;">
   <div class="card-body">
     <div class="card-title"></div>
+
+    <div class="text-center" *ngIf="usuarioJaCadastrado">
+      <small class="text-danger">Este usuário/e-mail já foi cadastrado</small>        
+    </div>
     
     <form [formGroup]="formulario" (ngSubmit)="cadastrarUsuario()">
       <div class="form-group">
