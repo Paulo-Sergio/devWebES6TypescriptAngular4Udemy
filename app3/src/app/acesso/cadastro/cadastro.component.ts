@@ -53,7 +53,7 @@ export class CadastroComponent implements OnInit {
     this.authService.cadastrarUsuario(usuario)
       .then((resp) => {
         console.log(resp)
-        if (resp.status == 400) {
+        if (resp != undefined && resp.status == 400) {
           this.usuarioJaCadastrado = true
         } else {
           this.exibirPainelLogin()

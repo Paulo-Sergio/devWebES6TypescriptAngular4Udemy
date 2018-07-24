@@ -40,8 +40,8 @@ export class LoginComponent implements OnInit {
 
     this.authService.autenticar(this.formulario.value.email, this.formulario.value.senha)
       .then((resp: any) => {
-        console.log(resp.status)
-        if (resp.status == 400) 
+        console.log(resp)
+        if (resp != undefined && resp.status == 400) 
           this.usuarioNaoEncontrado = true
       })
   }

@@ -49,7 +49,7 @@ export class AuthService {
       })
       .catch((error: any) => {
         console.log(error)
-        if (error.code == 'auth/user-not-found') {
+        if (error.code == 'auth/user-not-found' || error.code == 'auth/wrong-password') {
           error.status = 400
           return error
         }
