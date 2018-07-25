@@ -13,10 +13,11 @@ import { LoginComponent } from './acesso/login/login.component';
 import { CadastroComponent } from './acesso/cadastro/cadastro.component';
 import { HomeComponent } from './home/home.component';
 import { PublicacoesComponent } from './home/publicacoes/publicacoes.component';
+import { IncluirPublicacaoComponent } from './home/incluir-publicacao/incluir-publicacao.component';
 
 import { AuthService } from './auth.service';
 import { AuthGuard } from './auth.guard';
-import { IncluirPublicacaoComponent } from './home/incluir-publicacao/incluir-publicacao.component';
+import { BDService } from './bd.service';
 
 @NgModule({
   declarations: [
@@ -35,7 +36,7 @@ import { IncluirPublicacaoComponent } from './home/incluir-publicacao/incluir-pu
     ReactiveFormsModule,
     RouterModule.forRoot(ROUTES)
   ],
-  providers: [AuthService, AuthGuard],
+  providers: [AuthService, AuthGuard, BDService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
