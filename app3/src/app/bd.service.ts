@@ -40,10 +40,30 @@ export class BDService {
   }
 
   public consultaPublicacoes(emailUsuario: string): any {
+    // consultar as publicações (database)
     firebase.database().ref(`publicacoes/${btoa(emailUsuario)}`)
       .once('value')
       .then((snapshot: any) => {
         console.log(snapshot.val())
+
+        let publicacoes: any[] = []
+
+        snapshot.forEach((childSnapshot: any) => {
+          let publicacao = childSnapshot.val()
+
+          // consultar a url da imagem (storage)
+          firebase.storage().ref()
+            .child(`imagens/${childSnapshot.key}`)
+            .getDownloadURL()
+            .then((url: string) => {
+              // console.log(url)
+              publicacao.url_imagem = url
+
+              publicacoes.push(publicacao)
+            })
+        });
+
+        console.log(publicacoes)
       })
   }
 
