@@ -39,32 +39,44 @@ export class BDService {
 
   }
 
-  public consultaPublicacoes(emailUsuario: string): any {
-    // consultar as publicações (database)
-    firebase.database().ref(`publicacoes/${btoa(emailUsuario)}`)
-      .once('value')
-      .then((snapshot: any) => {
-        console.log(snapshot.val())
+  public consultaPublicacoes(emailUsuario: string): Promise<any> {
 
-        let publicacoes: any[] = []
+    return new Promise((resolve, reject) => {
 
-        snapshot.forEach((childSnapshot: any) => {
-          let publicacao = childSnapshot.val()
+      // consultar as publicações (database)
+      firebase.database().ref(`publicacoes/${btoa(emailUsuario)}`)
+        .once('value')
+        .then((snapshot: any) => {
+          console.log(snapshot.val())
 
-          // consultar a url da imagem (storage)
-          firebase.storage().ref()
-            .child(`imagens/${childSnapshot.key}`)
-            .getDownloadURL()
-            .then((url: string) => {
-              // console.log(url)
-              publicacao.url_imagem = url
+          let publicacoes: any[] = []
 
-              publicacoes.push(publicacao)
-            })
-        });
+          snapshot.forEach((childSnapshot: any) => {
+            let publicacao = childSnapshot.val()
 
-        console.log(publicacoes)
-      })
+            // consultar a url da imagem (storage)
+            firebase.storage().ref()
+              .child(`imagens/${childSnapshot.key}`)
+              .getDownloadURL()
+              .then((url: string) => {
+                publicacao.url_imagem = url
+
+                // consultar o nome do usuario
+                firebase.database().ref(`usuario_detalhe/${btoa(emailUsuario)}`)
+                  .once('value')
+                  .then((snapshot: any) => {
+                    publicacao.nome_usuario = snapshot.val().nome_usuario
+
+                    publicacoes.push(publicacao)
+                  })
+              })
+          });
+
+          resolve(publicacoes)
+        })
+
+    })
+
   }
 
 }
