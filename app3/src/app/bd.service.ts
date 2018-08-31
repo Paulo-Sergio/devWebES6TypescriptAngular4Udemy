@@ -45,6 +45,7 @@ export class BDService {
 
       // consultar as publicações (database)
       firebase.database().ref(`publicacoes/${btoa(emailUsuario)}`)
+        .orderByKey() // ordenacao (sequencia de inclusao dos documentos)
         .once('value')
         .then((snapshot: any) => {
           console.log(snapshot.val())
